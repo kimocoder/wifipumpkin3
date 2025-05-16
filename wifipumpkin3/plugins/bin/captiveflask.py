@@ -23,13 +23,13 @@ def is_safe_url(target):
     A URL is considered safe if it is relative or matches allowed domains.
     """
     allowed_domains = {"example.com", "another-safe-domain.com"}  # Add allowed domains here
-    target = target.replace('\\', '')  # Normalize backslashes
+    target = target.replace('\\', '/')  # Normalize backslashes
     parsed = urlparse(target)
     if not parsed.netloc and not parsed.scheme:
         # Relative URL, safe to redirect
         return True
-    if parsed.netloc in allowed_domains:
-        # Absolute URL with an allowed domain
+    if parsed.scheme in {"http", "https"} and parsed.netloc in allowed_domains:
+        # Absolute URL with an allowed domain and valid scheme
         return True
     return False
 
@@ -67,9 +67,10 @@ def login():
         elif "orig_url" in request.args and len(request.args["orig_url"]) > 0:
             orig_url = unquote(request.args["orig_url"])
             if is_safe_url(orig_url):
-                return redirect(orig_url)
+                return redirect(orig_url, code=302)
             else:
-                return redirect('/')
+                # Redirect to a safe default page if the URL is not safe
+                return redirect('/', code=302)
         else:
             return render_template("templates/login_successful.html")
     else:
