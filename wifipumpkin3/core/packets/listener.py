@@ -291,7 +291,7 @@ str(p)
 if __name__ == "__main__":
     s1 = socket(type=SOCK_DGRAM)
     s1.setsockopt(SOL_IP, SO_REUSEADDR, 1)
-    s1.bind(("", 67))
+    s1.bind(("127.0.0.1", 67))  # Bind to the loopback address for local testing
     # s2 = socket(type = SOCK_DGRAM)
     # s2.setsockopt(SOL_IP, SO_REUSEADDR, 1)
     # s2.bind(('', 68))
