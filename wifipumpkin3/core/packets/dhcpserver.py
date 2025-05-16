@@ -1,4 +1,5 @@
 import socket
+import netifaces
 from dhcplib.packet import DHCPPacket, _FORMAT_CONVERSION_DESERIAL, DHCP_OPTIONS_TYPES
 import ipaddress as ip
 from queue import Queue
@@ -178,7 +179,9 @@ class DHCPThread(QThread):
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
-        self.sock.bind(("", server_port))
+        import netifaces
+        iface_ip = netifaces.ifaddresses(self.iface)[netifaces.AF_INET][0]['addr']
+        self.sock.bind((iface_ip, server_port))
         self.sock.setsockopt(
             socket.SOL_SOCKET, socket.SO_BINDTODEVICE, str(self.iface + "\0").encode()
         )
