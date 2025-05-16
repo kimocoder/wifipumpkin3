@@ -11,7 +11,7 @@ dnslib==0.9.17
 loguru>=0.4.0
 scapy>=2.4.4
 isc_dhcp_leases>=0.9.1
-dnspython==1.16.0
+dnspython==2.6.1
 Flask>=2.0
 requests>=2.18.4
 beautifulsoup4>=4.9.1
