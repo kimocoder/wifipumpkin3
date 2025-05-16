@@ -15,7 +15,7 @@ dnspython==1.16.0
 Flask>=2.0
 requests>=2.18.4
 beautifulsoup4>=4.9.1
-PyJWT==2.1.0
+PyJWT==2.4.0
 Flask-RESTful>=0.3.9
 aiofiles
 ping3
