@@ -29,6 +29,7 @@ import weakref
 
 class ConsoleUIBase(Cmd):
     """shell console UI base model"""
+
     commands_stack: list = []
 
     def setOptions(self):
@@ -36,8 +37,8 @@ class ConsoleUIBase(Cmd):
             self.loadPulpFiles(self.parse_args.pulp)
         elif self.parse_args.xpulp and not self.commands_stack:
             self.commands_stack = self.parse_args.xpulp.split(";")
-            
-        if self.commands_stack: 
+
+        if self.commands_stack:
             return self.exec_cmdcommads_stack()
 
     def default(self, args: str):
@@ -95,7 +96,7 @@ class ConsoleUIBase(Cmd):
         """load command separate for ; file or string"""
         for command in commands.split(separator):
             self.commands_stack.append(command)
-            
+
     def exec_cmdcommads_stack(self):
         """Exec command separate for ; file or string"""
         for command in self.commands_stack[:]:
@@ -265,10 +266,9 @@ class ModuleUI(ConsoleUIBase):
         self.setOptions()
         self.set_prompt_modules()
 
-
     def initialize(self):
         pass
-    
+
     def setOptions(self):
         if self.root["PumpkinShell"].getInstance().commands_stack:
             self.commands_stack = self.root["PumpkinShell"].getInstance().commands_stack

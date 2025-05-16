@@ -170,7 +170,6 @@ class Resolver(ProxyResolver):
 
 
 class LocalDNSLogger(object):
-
     """
     The class provides a default set of logging functions for the various
     stages of the request handled by a DNSServer instance which are
@@ -193,64 +192,87 @@ class LocalDNSLogger(object):
 
     def log_recv(self, handler, data):
         if self.verbose:
-            self.logger.emit("Received: [%s:%d] (%s) <%d> : %s" %(
-                        handler.client_address[0],
-                        handler.client_address[1],
-                        handler.protocol,
-                        len(data),
-                        binascii.hexlify(data)))
+            self.logger.emit(
+                "Received: [%s:%d] (%s) <%d> : %s"
+                % (
+                    handler.client_address[0],
+                    handler.client_address[1],
+                    handler.protocol,
+                    len(data),
+                    binascii.hexlify(data),
+                )
+            )
             self.logger.emit(hexdump(data, True))
-            
 
     def log_send(self, handler, data):
         if self.verbose:
-            self.logger.emit("Sent: [%s:%d] (%s) <%d> : %s" %(
-                        handler.client_address[0],
-                        handler.client_address[1],
-                        handler.protocol,
-                        len(data),
-                        binascii.hexlify(data)))
+            self.logger.emit(
+                "Sent: [%s:%d] (%s) <%d> : %s"
+                % (
+                    handler.client_address[0],
+                    handler.client_address[1],
+                    handler.protocol,
+                    len(data),
+                    binascii.hexlify(data),
+                )
+            )
             self.logger.emit(hexdump(data, True))
 
     def log_request(self, handler, request):
         if self.verbose:
-            self.logger.emit("Request: [%s:%d] (%s) / '%s' (%s)" %(
-                        handler.client_address[0],
-                        handler.client_address[1],
-                        handler.protocol,
-                        request.q.qname,
-                        QTYPE[request.q.qtype]))
+            self.logger.emit(
+                "Request: [%s:%d] (%s) / '%s' (%s)"
+                % (
+                    handler.client_address[0],
+                    handler.client_address[1],
+                    handler.protocol,
+                    request.q.qname,
+                    QTYPE[request.q.qtype],
+                )
+            )
             self.log_data(request)
 
     def log_reply(self, handler, reply):
         if self.verbose:
-            self.logger.emit("Reply: [%s:%d] (%s) / '%s' (%s) / RRs: %s" %(
-                        handler.client_address[0],
-                        handler.client_address[1],
-                        handler.protocol,
-                        reply.q.qname,
-                        QTYPE[reply.q.qtype],
-                        ",".join([QTYPE[a.rtype] for a in reply.rr])))
+            self.logger.emit(
+                "Reply: [%s:%d] (%s) / '%s' (%s) / RRs: %s"
+                % (
+                    handler.client_address[0],
+                    handler.client_address[1],
+                    handler.protocol,
+                    reply.q.qname,
+                    QTYPE[reply.q.qtype],
+                    ",".join([QTYPE[a.rtype] for a in reply.rr]),
+                )
+            )
             self.log_data(reply)
 
     def log_truncated(self, handler, reply):
         if self.verbose:
-            self.logger.emit("Truncated Reply: [%s:%d] (%s) / '%s' (%s) / RRs: %s" %(
-                        handler.client_address[0],
-                        handler.client_address[1],
-                        handler.protocol,
-                        reply.q.qname,
-                        QTYPE[reply.q.qtype],
-                        ",".join([QTYPE[a.rtype] for a in reply.rr])))
+            self.logger.emit(
+                "Truncated Reply: [%s:%d] (%s) / '%s' (%s) / RRs: %s"
+                % (
+                    handler.client_address[0],
+                    handler.client_address[1],
+                    handler.protocol,
+                    reply.q.qname,
+                    QTYPE[reply.q.qtype],
+                    ",".join([QTYPE[a.rtype] for a in reply.rr]),
+                )
+            )
             self.log_data(reply)
 
     def log_error(self, handler, e):
         if self.verbose:
-            self.logger.emit("Invalid Request: [%s:%d] (%s) :: %s" %(
-                        handler.client_address[0],
-                        handler.client_address[1],
-                        handler.protocol,
-                        e))
+            self.logger.emit(
+                "Invalid Request: [%s:%d] (%s) :: %s"
+                % (
+                    handler.client_address[0],
+                    handler.client_address[1],
+                    handler.protocol,
+                    e,
+                )
+            )
 
     def log_data(self, dnsobj):
         self.logger.emit("\n" + dnsobj.toZone("    ") + "\n")
@@ -272,11 +294,16 @@ class DNSServerThread(QThread):
         upstream = os.getenv("UPSTREAM", "8.8.8.8")
         zone_file = Path(self.conf.get("accesspoint", "pydns_zone_file"))
         self.logger_dns = LocalDNSLogger(
-            self.sendRequests, 
-            self.conf.get("accesspoint", "pydns_verbose", format=bool))
+            self.sendRequests,
+            self.conf.get("accesspoint", "pydns_verbose", format=bool),
+        )
         self.resolver = Resolver(upstream, zone_file, self.sendRequests)
         self.udp_server = DNSServer(self.resolver, port=port, logger=self.logger_dns)
-        print(display_messages("starting {} port: {}".format(self.objectName(), port), info=True))
+        print(
+            display_messages(
+                "starting {} port: {}".format(self.objectName(), port), info=True
+            )
+        )
 
         # logger.info('starting DNS server on port %d, upstream DNS server "%s"', port, upstream)
         self.udp_server.start_thread()

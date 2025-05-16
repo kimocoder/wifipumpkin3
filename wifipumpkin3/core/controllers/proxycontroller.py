@@ -119,7 +119,7 @@ class ProxyModeController(PluginsUI, ControllerBlueprint):
         return self.proxies
 
     def getInfo(self, excluded=()) -> dict:
-        return {k:v for k,v in self.getProxyInfo.items() if k not in excluded}
+        return {k: v for k, v in self.getProxyInfo.items() if k not in excluded}
 
     def Start(self):
         self.Active.Initialize()

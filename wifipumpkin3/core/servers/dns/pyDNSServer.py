@@ -48,5 +48,3 @@ class PyDNSServer(DNSBase):
             self.reactor = DNSServerThread(self.conf)
             self.reactor.sendRequests.connect(self.LogOutput)
             self.reactor.setObjectName(self.ID)
-
-

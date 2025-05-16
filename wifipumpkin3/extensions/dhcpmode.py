@@ -92,9 +92,11 @@ class DhcpMode(ExtensionUI):
             output_table.append(
                 [
                     key,
-                    setcolor("True", color="green")
-                    if instance.isChecked()
-                    else setcolor("False", color="red"),
+                    (
+                        setcolor("True", color="green")
+                        if instance.isChecked()
+                        else setcolor("False", color="red")
+                    ),
                     instance.Name,
                 ]
             )
@@ -103,14 +105,15 @@ class DhcpMode(ExtensionUI):
         if self.conf.get("accesspoint", "pydns_server", format=bool):
             print(display_messages("Settings DNS:", info=True, sublime=True))
             options = [
-                key for key in self.conf.get_all_childname("accesspoint") 
-                if str(key).startswith('pydns')
-            ] 
+                key
+                for key in self.conf.get_all_childname("accesspoint")
+                if str(key).startswith("pydns")
+            ]
             for config in options:
                 print(
                     " {}={}".format(
-                        setcolor(config, color="purple"), 
-                        self.conf.get("accesspoint", config)
+                        setcolor(config, color="purple"),
+                        self.conf.get("accesspoint", config),
                     )
                 )
-            print('\n')
+            print("\n")

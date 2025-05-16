@@ -47,6 +47,7 @@ def ProgramPath(executablename):
     else:
         return False
 
+
 def exec_bash(command):
     """run command on background hide output"""
     os.popen(command)

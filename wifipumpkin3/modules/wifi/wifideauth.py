@@ -181,9 +181,11 @@ class ModPump(ModuleUI):
         sniff(
             iface=self.options.get("interface")[0],
             prn=self.sniffAp,
-            timeout=None
-            if int(self.options.get("timeout")[0]) == 0
-            else int(self.options.get("timeout")[0]),
+            timeout=(
+                None
+                if int(self.options.get("timeout")[0]) == 0
+                else int(self.options.get("timeout")[0])
+            ),
         )
         self.p.terminate()
         self.set_monitor_mode()

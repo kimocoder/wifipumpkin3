@@ -141,7 +141,7 @@ class DHCPProtocol(QObject):
                 pass
 
     def getHostnamePakcet(self, packet):
-        for (option_id, data) in sorted(packet._options.items()):
+        for option_id, data in sorted(packet._options.items()):
             result = None
             if option_id == 53:  # dhcp_message_type
                 pass
@@ -180,7 +180,8 @@ class DHCPThread(QThread):
         self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
         import netifaces
-        iface_ip = netifaces.ifaddresses(self.iface)[netifaces.AF_INET][0]['addr']
+
+        iface_ip = netifaces.ifaddresses(self.iface)[netifaces.AF_INET][0]["addr"]
         self.sock.bind((iface_ip, server_port))
         self.sock.setsockopt(
             socket.SOL_SOCKET, socket.SO_BINDTODEVICE, str(self.iface + "\0").encode()

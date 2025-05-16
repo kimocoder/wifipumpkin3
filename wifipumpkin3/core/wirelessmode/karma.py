@@ -71,7 +71,7 @@ class Karma(Mode):
     def boot(self):
         # create thread for hostapd and connect get_Hostapd_Response functio
         self.reactor = ProcessHostapd(
-            {self.getHostapdPath: [C.HOSTAPDCONF_PATH, '-k']}, "MDSNjD"
+            {self.getHostapdPath: [C.HOSTAPDCONF_PATH, "-k"]}, "MDSNjD"
         )
         self.reactor.setObjectName("hostapd_{}".format(self.ID))
         self.reactor.statusAP_connected.connect(self.get_Hostapd_Response)

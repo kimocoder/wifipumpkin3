@@ -27,9 +27,7 @@ class Phishkin3(ProxyMode):
     Name = "Phishkin3"
     Author = "Pumpkin-Dev"
     ID = "phishkin3"
-    Description = (
-        "Proxy for create captive portal with external phishing page "
-    )
+    Description = "Proxy for create captive portal with external phishing page "
     Hidden = False
     LogFile = C.LOG_PHISHKIN3
     CONFIGINI_PATH = C.CONFIG_PK_INI
@@ -58,7 +56,6 @@ class Phishkin3(ProxyMode):
         ]
         return self._cmd_array
 
-
     @property
     def getPlugins(self):
         list_commands = []
@@ -81,28 +78,28 @@ class Phishkin3(ProxyMode):
                 iptables=self.getIptablesPath, iface=IFACE
             )
         )
-        
+
         print(display_messages("allow traffic to Phishkin3 captive portal", info=True))
         self.add_default_rules(
             "{iptables} -A FORWARD -i {iface} -p tcp --dport {port} -d {ip} -j ACCEPT".format(
                 iptables=self.getIptablesPath, iface=IFACE, port=PORT, ip=IP_ADDRESS
             )
         )
-        
+
         print(display_messages("block all other traffic in access point", info=True))
         self.add_default_rules(
             "{iptables} -A FORWARD -i {iface} -j DROP ".format(
                 iptables=self.getIptablesPath, iface=IFACE
             )
         )
-        
+
         print(display_messages("redirecting HTTP traffic to captive portal", info=True))
         self.add_default_rules(
             "{iptables} -t nat -A PREROUTING -i {iface} -p tcp --dport 80 -j DNAT --to-destination {ip}:{port}".format(
                 iptables=self.getIptablesPath, iface=IFACE, ip=IP_ADDRESS, port=PORT
             )
         )
-            
+
         self.runDefaultRules()
 
     def boot(self):

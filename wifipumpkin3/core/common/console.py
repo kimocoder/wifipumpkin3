@@ -67,7 +67,7 @@ class PumpkinShell(Qt.QObject, ConsoleUI):
         self.conf.set("accesspoint", "current_session", self.currentSessionID)
         # set interface for shared connection from params
         self.conf.set("accesspoint", "interface_net", self.parse_args.interface_net)
-            
+
         if self.parse_args.interface:
             self.conf.set("accesspoint", "interface", self.parse_args.interface)
 
@@ -104,18 +104,18 @@ class PumpkinShell(Qt.QObject, ConsoleUI):
         self.intialize_hook_func(self.mitm_controller)
 
         # register autocomplete set security command
-        self.parser_autcomplete_func[
-            "parser_set_security"
-        ] = self.wireless_controller.Settings.getCommandsSecurity
-        self.parser_autcomplete_func[
-            "parser_set_hostapd_config"
-        ] = self.wireless_controller.Settings.getCommandsHostapd
-        self.parser_autcomplete_func[
-            "parser_set_dhcpconf"
-        ] = self.wireless_controller.Settings.getCommandsDhcpConf
-        self.parser_autcomplete_func[
-            "parser_set_dhcpmode"
-        ] = self.dns_controller.getCommandsDhcpMode
+        self.parser_autcomplete_func["parser_set_security"] = (
+            self.wireless_controller.Settings.getCommandsSecurity
+        )
+        self.parser_autcomplete_func["parser_set_hostapd_config"] = (
+            self.wireless_controller.Settings.getCommandsHostapd
+        )
+        self.parser_autcomplete_func["parser_set_dhcpconf"] = (
+            self.wireless_controller.Settings.getCommandsDhcpConf
+        )
+        self.parser_autcomplete_func["parser_set_dhcpmode"] = (
+            self.dns_controller.getCommandsDhcpMode
+        )
 
         self.commands = {
             "interface": "interface",
@@ -179,9 +179,11 @@ class PumpkinShell(Qt.QObject, ConsoleUI):
             output_table.append(
                 [
                     id_mode,
-                    setcolor("True", color="green")
-                    if info["Checked"]
-                    else setcolor("False", color="red"),
+                    (
+                        setcolor("True", color="green")
+                        if info["Checked"]
+                        else setcolor("False", color="red")
+                    ),
                     info["Name"],
                 ]
             )
@@ -347,9 +349,11 @@ class PumpkinShell(Qt.QObject, ConsoleUI):
                 output_table.append(
                     [
                         module_name,
-                        setcolor("is Running", color="green")
-                        if instance._background_mode
-                        else setcolor("not Running", color="red"),
+                        (
+                            setcolor("is Running", color="green")
+                            if instance._background_mode
+                            else setcolor("not Running", color="red")
+                        ),
                     ]
                 )
             return display_tabulate(headers_table, output_table)
@@ -477,7 +481,7 @@ class PumpkinShell(Qt.QObject, ConsoleUI):
         """core: exit program and all threads"""
         if len(self.threads["RogueAP"]) > 0:
             user_input = input("Do you really want to quit? [y/n]: ").lower()
-            if user_input == 'y':
+            if user_input == "y":
                 self.killThreads()
         print("Exiting...")
         raise SystemExit

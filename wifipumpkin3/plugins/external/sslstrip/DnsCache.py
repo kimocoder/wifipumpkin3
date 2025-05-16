@@ -1,5 +1,4 @@
 class DnsCache:
-
     """
     The DnsCache maintains a cache of DNS lookups, mirroring the browser experience.
     """

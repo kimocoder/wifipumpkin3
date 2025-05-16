@@ -40,7 +40,6 @@ from wifipumpkin3.plugins.external.sslstrip.DnsCache import DnsCache
 
 
 class ClientRequest(Request):
-
     """This class represents incoming client requests and is essentially where
     the magic begins.  Here we remove the client headers we dont like, and then
     respond with either favicon spoofing, session denial, or proxy through HTTP

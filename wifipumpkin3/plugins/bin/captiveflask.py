@@ -17,13 +17,17 @@ URL_REDIRECT = None
 PORT = 80
 config = None
 
+
 def is_safe_url(target):
     """
     Validates if the given URL is safe for redirection.
     A URL is considered safe if it is relative or matches allowed domains.
     """
-    allowed_domains = {"example.com", "another-safe-domain.com"}  # Add allowed domains here
-    target = target.replace('\\', '/')  # Normalize backslashes
+    allowed_domains = {
+        "example.com",
+        "another-safe-domain.com",
+    }  # Add allowed domains here
+    target = target.replace("\\", "/")  # Normalize backslashes
     parsed = urlparse(target)
     if not parsed.netloc and not parsed.scheme:
         # Relative URL, safe to redirect
@@ -33,9 +37,21 @@ def is_safe_url(target):
         return True
     return False
 
+
 def login_user(ip, iptables_binary_path):
     subprocess.call(
-        [iptables_binary_path, "-t", "nat", "-I", "PREROUTING", "1", "-s", ip, "-j", "ACCEPT"]
+        [
+            iptables_binary_path,
+            "-t",
+            "nat",
+            "-I",
+            "PREROUTING",
+            "1",
+            "-s",
+            ip,
+            "-j",
+            "ACCEPT",
+        ]
     )
     subprocess.call([iptables_binary_path, "-I", "FORWARD", "-s", ip, "-j", "ACCEPT"])
 
@@ -61,7 +77,7 @@ def login():
         sys.stdout.flush()
         login_user(request.remote_addr, config.get("iptables", "path_binary"))
         if URL_REDIRECT:
-            return redirect(URL_REDIRECT, code=302) 
+            return redirect(URL_REDIRECT, code=302)
         if FORCE_REDIRECT:
             return render_template("templates/login_successful.html")
         elif "orig_url" in request.args and len(request.args["orig_url"]) > 0:
@@ -70,7 +86,7 @@ def login():
                 return redirect(orig_url, code=302)
             else:
                 # Redirect to a safe default page if the URL is not safe
-                return redirect('/', code=302)
+                return redirect("/", code=302)
         else:
             return render_template("templates/login_successful.html")
     else:
@@ -91,8 +107,9 @@ def catch_all(path):
     global REDIRECT, PORT
     if PORT != 80:
         return redirect(
-            "http://{}:{}/login?".format(REDIRECT, PORT) + urlencode({"orig_url": request.url})
-        )        
+            "http://{}:{}/login?".format(REDIRECT, PORT)
+            + urlencode({"orig_url": request.url})
+        )
     return redirect(
         "http://{}/login?".format(REDIRECT) + urlencode({"orig_url": request.url})
     )
@@ -160,7 +177,7 @@ def main():
     FORCE_REDIRECT = args.force_redirect
     URL_REDIRECT = args.redirect_url
     PORT = args.port
-    
+
     config = SettingsINI(C.CONFIG_INI)
 
     app.static_url_path = "\{}".format(args.static)

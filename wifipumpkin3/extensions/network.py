@@ -25,7 +25,7 @@ class Network(ExtensionUI):
 
     Name = "network"
 
-    def __init__(self, parse_args=None, root = None):
+    def __init__(self, parse_args=None, root=None):
         self.parse_args = parse_args
         self.root = root
 
@@ -36,27 +36,44 @@ class Network(ExtensionUI):
     def do_network(self, args):
         """core: show informations about connections"""
         print(
-            display_messages(
-                "Default Connection Information", info=True, sublime=True
-            )
+            display_messages("Default Connection Information", info=True, sublime=True)
         )
         self.interfacesLink = Refactor.get_interfaces()
         default_iface = self.interfacesLink["activated"][0]
-        print(display_messages("Interface: {} Type: {}".format(setcolor(default_iface, color="yellow"), setcolor(self.interfacesLink["activated"][1], color="yellow")),info=True))
-        print(display_messages("Internet status: {}".format(
-            setcolor("On", color="green") if 
-            Refactor.checkInternetConnectionFromInterface(default_iface) else
-            setcolor("Off", color="red")), info=True))
-        
         print(
             display_messages(
-                "Wireless Network Information", info=True, sublime=True
+                "Interface: {} Type: {}".format(
+                    setcolor(default_iface, color="yellow"),
+                    setcolor(self.interfacesLink["activated"][1], color="yellow"),
+                ),
+                info=True,
             )
         )
+        print(
+            display_messages(
+                "Internet status: {}".format(
+                    setcolor("On", color="green")
+                    if Refactor.checkInternetConnectionFromInterface(default_iface)
+                    else setcolor("Off", color="red")
+                ),
+                info=True,
+            )
+        )
+
+        print(display_messages("Wireless Network Information", info=True, sublime=True))
         wireless_ifaces = self.interfacesLink["all_wireless"]
         for iface in wireless_ifaces:
             support_modes = Refactor.get_supported_interface(iface)["Supported"]
-            print(display_messages("Interface: {} | AP mode support::[{}]".format(
-                setcolor(iface, color="yellow"),
-                setcolor("true", color="green") if "AP" in support_modes else setcolor("false", color="red")
-            ), info=True))
+            print(
+                display_messages(
+                    "Interface: {} | AP mode support::[{}]".format(
+                        setcolor(iface, color="yellow"),
+                        (
+                            setcolor("true", color="green")
+                            if "AP" in support_modes
+                            else setcolor("false", color="red")
+                        ),
+                    ),
+                    info=True,
+                )
+            )
