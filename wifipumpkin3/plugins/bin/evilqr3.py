@@ -55,7 +55,14 @@ def login():
         if FORCE_REDIRECT:
             return render_template("templates/login_successful.html")
         elif "orig_url" in request.args and len(request.args["orig_url"]) > 0:
-            return redirect(unquote(request.args["orig_url"]))
+            orig_url = unquote(request.args["orig_url"])
+            from urllib.parse import urlparse
+            orig_url = orig_url.replace('\\', '')  # Normalize backslashes
+            parsed_url = urlparse(orig_url)
+            if not parsed_url.netloc and not parsed_url.scheme:  # Ensure it's a relative URL
+                return redirect(orig_url)
+            else:
+                return redirect('/')  # Redirect to a safe default location
         else:
             return render_template("templates/login_successful.html")
     else:
@@ -92,7 +99,14 @@ def Mobilelogin():
         if FORCE_REDIRECT:
             return render_template("templates/login_successful.html")
         elif "orig_url" in request.args and len(request.args["orig_url"]) > 0:
-            return redirect(unquote(request.args["orig_url"]))
+            orig_url = unquote(request.args["orig_url"])
+            from urllib.parse import urlparse
+            orig_url = orig_url.replace('\\', '')  # Normalize backslashes
+            parsed_url = urlparse(orig_url)
+            if not parsed_url.netloc and not parsed_url.scheme:  # Ensure it's a relative URL
+                return redirect(orig_url)
+            else:
+                return redirect('/')  # Redirect to a safe default location
         else:
             return render_template("templates/login_successful.html")
     else:
