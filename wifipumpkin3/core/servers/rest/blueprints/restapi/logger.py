@@ -38,7 +38,12 @@ class getFileLogResource(Resource):
 
     @token_required
     def get(self, filename=None):
-        if not os.path.isfile("{}/{}.log".format(C.LOG_BASE, filename)):
+        # Construct the full path and normalize it
+        fullpath = os.path.normpath(os.path.join(C.LOG_BASE, f"{filename}.log"))
+        # Ensure the normalized path starts with the base directory
+        if not fullpath.startswith(C.LOG_BASE):
+            return exception("Invalid file path.", code=400)
+        if not os.path.isfile(fullpath):
             return exception("Cannot found that file log {}".format(filename), code=400)
         for args in request.args:
             if not args in self.args:
@@ -48,7 +53,7 @@ class getFileLogResource(Resource):
 
         table = []
         page = int(request.args.get("page"))
-        with open("{}/{}.log".format(C.LOG_BASE, filename), "r") as f:
+        with open(fullpath, "r") as f:
             for line in f:
                 table.append(json.loads(line))
         data_splited = list(self.chunk(table, self.limit_view))
