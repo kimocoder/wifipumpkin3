@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 from os import path
 from PyQt5.QtCore import QSettings
 import wifipumpkin3.core.utility.constants as C

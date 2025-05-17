@@ -1,3 +1,5 @@
+from __future__ import absolute_import
+from __future__ import print_function
 from tabulate import tabulate
 from wifipumpkin3.core.utility.banners import random_banners
 
@@ -58,7 +60,7 @@ colors = {
 
 
 def banner(name=""):
-    print(random_banners().format(name))
+    print((random_banners().format(name)))
 
 
 def setcolor(text, color="", underline=False):
@@ -97,7 +99,7 @@ def setcolor(text, color="", underline=False):
 
 
 def display_tabulate(header=[], content=[], tablefmt="presto", newline=True, **kwargs):
-    print(tabulate(content, header, tablefmt=tablefmt, **kwargs))
+    print((tabulate(content, header, tablefmt=tablefmt, **kwargs)))
     if newline:
         print("\n")
 

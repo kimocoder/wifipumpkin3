@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 import os
 import wifipumpkin3 as wp3
 
