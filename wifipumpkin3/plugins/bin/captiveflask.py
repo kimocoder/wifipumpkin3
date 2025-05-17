@@ -180,7 +180,7 @@ def main():
 
     config = SettingsINI(C.CONFIG_INI)
 
-    app.static_url_path = "\{}".format(args.static)
+    app.static_url_path = "\\{}".format(args.static)
     app.static_folder = "{}".format(args.static)
     app.template_folder = args.template
 
