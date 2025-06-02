@@ -21,7 +21,6 @@ from configparser import ConfigParser
 
 
 class ResponseTampererFactory:
-
     """
     ResponseTampererFactory creates response tamperer that modifies responses to clients based on config file setting.
     """

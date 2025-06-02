@@ -1,3 +1,3 @@
-__version__ = "1.1.7"
-__codename__ = "Gao"
+__version__ = "1.1.8"
+__codename__ = "NetHunter"
 __branch__ = "main"

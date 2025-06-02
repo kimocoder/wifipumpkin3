@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 import urwid
 from wifipumpkin3.core.ui.uimode import WidgetBase
 
@@ -43,7 +44,7 @@ class ui_DhcpSettingsClass(WidgetBase):
         )
 
         self.widget_main = urwid.Padding(
-            self.menu("DHCP Server", self.class_headers.keys()),
+            self.menu("DHCP Server", list(self.class_headers.keys())),
             left=2,
             right=2,
         )

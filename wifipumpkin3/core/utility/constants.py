@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 import os
 import wifipumpkin3 as wp3
 
@@ -26,8 +27,8 @@ wp3_path_data = f"{wp3_setup_packager_path}/data"
 
 config_dir_packager_data = [
     f"{wp3_path_data}/config",
-    f"/usr/share/wifipumpkin3/data/config", # for .deb kali linux
-    f"/usr/wifipumpkin3/data/config", # for .deb debian general
+    f"/usr/share/wifipumpkin3/data/config",  # for .deb kali linux
+    f"/usr/wifipumpkin3/data/config",  # for .deb debian general
 ]
 
 SYSTEMCOMMAND = [

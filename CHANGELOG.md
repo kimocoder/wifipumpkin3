@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## [unReleased]
 
-## [1.1.X] 
+## [1.1.x] 
 
 ### Fixed
 - fixed: dockerfile Could not find suitable distribution for Requirement.parse('zope-interface>=5')

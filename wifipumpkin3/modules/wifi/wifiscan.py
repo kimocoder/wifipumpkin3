@@ -83,9 +83,11 @@ class ModPump(ModuleUI):
         sniff(
             iface=self.options.get("interface")[0],
             prn=self.sniffAp,
-            timeout=None
-            if int(self.options.get("timeout")[0]) == 0
-            else int(self.options.get("timeout")[0]),
+            timeout=(
+                None
+                if int(self.options.get("timeout")[0]) == 0
+                else int(self.options.get("timeout")[0])
+            ),
         )
         self.p.terminate()
         self.set_monitor_mode()
@@ -107,13 +109,13 @@ class ModPump(ModuleUI):
         ):
             essid = pkt[Dot11ProbeReq].info
             try:
-                essid = pkt[Dot11ProbeReq].info.decode('utf8')
+                essid = pkt[Dot11ProbeReq].info.decode("utf8")
             except UnicodeDecodeError:
                 try:
-                    essid = pkt[Dot11ProbeReq].info.decode('unicode-escape')
+                    essid = pkt[Dot11ProbeReq].info.decode("unicode-escape")
                 except Exception:
                     try:
-                        essid = pkt[Dot11ProbeReq].info.decode('latin1')
+                        essid = pkt[Dot11ProbeReq].info.decode("latin1")
                     except Exception:
                         essid = "Not decoded ssid"
         else:

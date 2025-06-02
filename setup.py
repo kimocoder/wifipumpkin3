@@ -36,15 +36,22 @@ with open("requirements.txt") as fp:
 
 folders = ["config"]
 
+
 def generate_data_files():
     data_files = []
-    data_dirs = ('config', 'exceptions','helps', 'scripts')
-    for path, dirs, files in chain.from_iterable(os.walk(data_dir) for data_dir in data_dirs):
-        install_dir = os.path.join('wifipumpkin3/data/' + path)    
-        list_entry = (install_dir, [os.path.join(path, f) for f in files if not f.startswith('.')])
+    data_dirs = ("config", "exceptions", "helps", "scripts")
+    for path, dirs, files in chain.from_iterable(
+        os.walk(data_dir) for data_dir in data_dirs
+    ):
+        install_dir = os.path.join("wifipumpkin3/data/" + path)
+        list_entry = (
+            install_dir,
+            [os.path.join(path, f) for f in files if not f.startswith(".")],
+        )
         data_files.append(list_entry)
 
     return data_files
+
 
 def create_user_dir_config():
     user_config_dir = os.path.expanduser("~") + "/.config/wifipumpkin3"

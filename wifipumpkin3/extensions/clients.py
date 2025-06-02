@@ -4,7 +4,11 @@ from wifipumpkin3.core.utility.printer import (
     display_messages,
     display_tabulate,
 )
-from wifipumpkin3.core.lib.mac_vendor_lookup import MacLookup, BaseMacLookup, VendorNotFoundError
+from wifipumpkin3.core.lib.mac_vendor_lookup import (
+    MacLookup,
+    BaseMacLookup,
+    VendorNotFoundError,
+)
 import wifipumpkin3.core.utility.constants as C
 
 # This file is part of the wifipumpkin3 Open Source Project.
@@ -46,11 +50,13 @@ class Clients(ExtensionUI):
             d_vendor = mac_obj.lookup(mac)
         except VendorNotFoundError:
             return "unknown vendor"
-        return d_vendor 
+        return d_vendor
 
     def do_clients(self, args):
         """ap: show all connected clients on AP"""
-        dhcp_mode: DHCPServers = self.root.getDefault.getController("dhcp_controller").Active
+        dhcp_mode: DHCPServers = self.root.getDefault.getController(
+            "dhcp_controller"
+        ).Active
         data_dict: dict = dhcp_mode.getStaClients
         if not data_dict:
             print(display_messages("No clients connected on AP!", error=True))

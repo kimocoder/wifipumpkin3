@@ -1,3 +1,5 @@
+from __future__ import absolute_import
+from __future__ import print_function
 from wifipumpkin3.core.config.globalimport import *
 
 # This file is part of the wifipumpkin3 Open Source Project.

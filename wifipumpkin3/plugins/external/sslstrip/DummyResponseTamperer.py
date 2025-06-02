@@ -21,7 +21,6 @@ from wifipumpkin3.plugins.external.sslstrip.URLMonitor import URLMonitor
 
 
 class DummyResponseTamperer:
-
     """
     DummyResponseTamperer is an exemplary class for server response tampering.
     """

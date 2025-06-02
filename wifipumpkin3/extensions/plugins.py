@@ -50,12 +50,16 @@ class Plugins(ExtensionUI):
             output_table.append(
                 [
                     plugin_name,
-                    setcolor("True", color="green")
-                    if status_plugin
-                    else setcolor("False", color="red"),
-                    plugin_info["Description"][:50] + "..."
-                    if len(plugin_info["Description"]) > 50
-                    else plugin_info["Description"],
+                    (
+                        setcolor("True", color="green")
+                        if status_plugin
+                        else setcolor("False", color="red")
+                    ),
+                    (
+                        plugin_info["Description"][:50] + "..."
+                        if len(plugin_info["Description"]) > 50
+                        else plugin_info["Description"]
+                    ),
                 ]
             )
             if (
@@ -80,9 +84,11 @@ class Plugins(ExtensionUI):
             output_plugins.append(
                 [
                     plugin_name,
-                    setcolor("True", color="green")
-                    if status_plugin
-                    else setcolor("False", color="red"),
+                    (
+                        setcolor("True", color="green")
+                        if status_plugin
+                        else setcolor("False", color="red")
+                    ),
                 ]
             )
         print(display_messages("Sniffkin3 plugins:", info=True, sublime=True))

@@ -63,12 +63,20 @@ class Ap(ExtensionUI):
                 self.root.conf.get("accesspoint", self.root.commands["ssid"]),
                 self.root.conf.get("accesspoint", self.root.commands["channel"]),
                 self.root.conf.get("accesspoint", self.root.commands["interface"]),
-                setcolor("default", color="green") 
-                if not self.root.conf.get("accesspoint", self.root.commands["interface_net"]) else
-                self.root.conf.get("accesspoint", self.root.commands["interface_net"]  ),
-                setcolor("is Running", color="green")
-                if status_ap
-                else setcolor("not Running", color="red"),
+                (
+                    setcolor("default", color="green")
+                    if not self.root.conf.get(
+                        "accesspoint", self.root.commands["interface_net"]
+                    )
+                    else self.root.conf.get(
+                        "accesspoint", self.root.commands["interface_net"]
+                    )
+                ),
+                (
+                    setcolor("is Running", color="green")
+                    if status_ap
+                    else setcolor("not Running", color="red")
+                ),
                 self.root.conf.get("accesspoint", self.root.commands["security"]),
                 self.root.conf.get("accesspoint", self.root.commands["hostapd_config"]),
             ]

@@ -119,16 +119,20 @@ class Mode(Qt.QObject):
         self.conf.set("accesspoint", "status_ap", value)
 
     def setIptables(self):
-        # get hostapd interface 
+        # get hostapd interface
         ifaceHostapd = self.conf.get("accesspoint", "interface")
-        # get interface for shared internet 
+        # get interface for shared internet
         ifaceSharedNet = self.conf.get("accesspoint", "interface_net")
         if not ifaceSharedNet:
             self.interfacesLink = Refactor.get_interfaces()
             ifaceSharedNet = self.interfacesLink["activated"][0]
 
         print(display_messages("sharing internet connection with NAT...", info=True))
-        print(display_messages(f"setting interface for sharing internet: {ifaceSharedNet} ", info=True))
+        print(
+            display_messages(
+                f"setting interface for sharing internet: {ifaceSharedNet} ", info=True
+            )
+        )
         self.threads_process = []
         for ech in self.conf.get_all_childname("iptables"):
             try:
@@ -192,7 +196,7 @@ class Mode(Qt.QObject):
     def LogOutput(self, data):
         """get inactivity client from hostapd response"""
         pass
-    
+
     @property
     def getDHCPMode(self) -> DHCPServers:
         return self.parent.getDefault.getController("dhcp_controller").Active

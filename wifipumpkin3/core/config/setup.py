@@ -1,4 +1,3 @@
-
 import os
 from distutils.dir_util import copy_tree
 import wifipumpkin3.core.utility.constants as C
@@ -7,6 +6,7 @@ from wifipumpkin3.core.utility.printer import (
     setcolor,
     display_messages,
 )
+
 
 def create_user_dir_config():
     user_config_dir = C.user_config_dir
@@ -24,7 +24,7 @@ def create_user_dir_config():
         for folder in C.config_dir_packager_data:
             if os.path.isdir(folder):
                 copy_tree(folder, user_config_dir + "/config")
-                
+
         if os.path.isdir(user_config_dir):
             print(
                 display_messages(

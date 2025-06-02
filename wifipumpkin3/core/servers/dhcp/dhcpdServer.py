@@ -26,7 +26,7 @@ class DhcpdServer(DHCPServers):
     @property
     def getStatusReactor(self):
         return self._isRunning
-    
+
     def Initialize(self):
         self.ifaceHostapd = self.conf.get("accesspoint", "interface")
         leases = C.DHCPLEASES_PATH
@@ -59,9 +59,7 @@ class DhcpdServer(DHCPServers):
         )
         print(
             display_messages(
-                "{} client join the AP".format(
-                    setcolor(mac, color="green")
-                ),
+                "{} client join the AP".format(setcolor(mac, color="green")),
                 info=True,
             )
         )

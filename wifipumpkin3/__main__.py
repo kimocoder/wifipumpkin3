@@ -2,6 +2,7 @@
 from logging import getLogger, ERROR
 
 from wifipumpkin3.core.config.setup import create_user_dir_config
+
 getLogger("scapy.runtime").setLevel(ERROR)
 import argparse
 import sys
@@ -21,7 +22,6 @@ from wifipumpkin3.core.common.platforms import Linux
 from os import getuid
 from wifipumpkin3.core.servers.rest.application import RestControllerAPI
 import threading
-
 
 
 def parser_args_func(parse_args, config):
@@ -54,7 +54,7 @@ def parser_args_func(parse_args, config):
             )
         )
         exit(1)
-        
+
     if parse_args.ig_networkmanager:
         manager_ifaces = Linux.get_interfaces()
         if not parse_args.ig_networkmanager in manager_ifaces.get("all_wireless"):
@@ -100,7 +100,7 @@ def parser_args_func(parse_args, config):
             )
         )
         exit(1)
-    
+
     if parse_args.wireless_mode:
         if parse_args.wireless_mode in config.get_all_childname("ap_mode"):
             config.set_one("ap_mode", parse_args.wireless_mode, True)
@@ -148,8 +148,8 @@ def wp3_header():
 def main():
 
     app = QtCore.QCoreApplication(sys.argv)
-    
-    # create config dir if not have 
+
+    # create config dir if not have
     create_user_dir_config()
 
     config = SettingsINI.getInstance()
@@ -164,7 +164,11 @@ def main():
         "-i", dest="interface", help="set interface for create AP", default=""
     )
     parser.add_argument(
-        "-iNet", dest="interface_net", required=False, help="set interface for share internet to AP", default=None
+        "-iNet",
+        dest="interface_net",
+        required=False,
+        help="set interface for share internet to AP",
+        default=None,
     )
     parser.add_argument(
         "-s", dest="session", help="set session for continue attack", default=None

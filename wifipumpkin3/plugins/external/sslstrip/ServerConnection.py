@@ -32,7 +32,6 @@ import gzip, inspect, io
 
 
 class ServerConnection(HTTPClient):
-
     """The server connection is where we do the bulk of the stripping.  Everything that
     comes back is examined.  The headers we dont like are removed, and the links are stripped
     from HTTPS to HTTP.
@@ -79,11 +78,9 @@ class ServerConnection(HTTPClient):
 
     def sendPostData(self):
         print(
-            self.getPostPrefix()
-            + " Data ("
-            + self.headers.get("host") if self.headers.get("host") else ' '
-            + "):\n"
-            + str(self.postData) if self.postData else ''
+            self.getPostPrefix() + " Data (" + self.headers.get("host")
+            if self.headers.get("host")
+            else " " + "):\n" + str(self.postData) if self.postData else ""
         )
         self.transport.write(self.postData)
 

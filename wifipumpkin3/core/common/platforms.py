@@ -64,11 +64,13 @@ class Linux(QtCore.QObject):
             "activated": [None, None],
             "all": [],
             "gateway": None,
-            "all_wireless" : [],
+            "all_wireless": [],
             "IPaddress": None,
         }
         interfaces["all"] = netifaces.interfaces()
-        interfaces["all_wireless"] = [ x for x in netifaces.interfaces() if x[:2] in ["wl", "wi", "ra", "at"] ]
+        interfaces["all_wireless"] = [
+            x for x in netifaces.interfaces() if x[:2] in ["wl", "wi", "ra", "at"]
+        ]
         try:
             interfaces["gateway"] = netifaces.gateways()["default"][netifaces.AF_INET][
                 0
@@ -92,7 +94,7 @@ class Linux(QtCore.QObject):
         except KeyError:
             pass
         return interfaces
-    
+
     @staticmethod
     def setNetworkManager(interface=str, remove=False):
         """mac address of interface to exclude"""
@@ -266,9 +268,9 @@ class Linux(QtCore.QObject):
         if "nf_tables" in Linux.getCommandOutput("iptables --version"):
             return Linux.getBinaryPath("iptables-legacy")
         return Linux.getBinaryPath("iptables")
-    
+
     @staticmethod
-    def checkInternetConnectionFromInterface(iface: str = None) -> bool: 
+    def checkInternetConnectionFromInterface(iface: str = None) -> bool:
         """check internet connection from interface name"""
         ping3.EXCEPTIONS = True
         try:
@@ -277,7 +279,7 @@ class Linux(QtCore.QObject):
         except ping3.errors.HostUnknown:  # Specific error is catched.
             print("Host unknown error raised.")
         except ping3.errors.Timeout:  # All ping3 errors are subclasses of `PingError`.
-            print("Host Timeout error raised.") 
+            print("Host Timeout error raised.")
         return False
 
     @staticmethod
@@ -299,6 +301,7 @@ class Linux(QtCore.QObject):
         except CalledProcessError:
             return _iface
         return _iface
+
 
 def is_hexadecimal(text):
     try:

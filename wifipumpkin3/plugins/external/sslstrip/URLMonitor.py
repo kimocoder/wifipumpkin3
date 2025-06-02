@@ -20,7 +20,6 @@ import re
 
 
 class URLMonitor:
-
     """
     The URL monitor maintains a set of (client, url) tuples that correspond to requests which the
     server is expecting over SSL.  It also keeps track of secure favicon urls.

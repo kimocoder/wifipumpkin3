@@ -3,7 +3,7 @@ dhcplib==0.1.1
 tabulate>=0.8.5
 urwid==2.1.2
 termcolor>=1.1.0
-twisted>=19.7.0
+twisted>=24.7.0rc1
 PyQt5>=5.14
 PyQt5-sip
 pyOpenSSL>=22.1.0
@@ -11,11 +11,23 @@ dnslib==0.9.17
 loguru>=0.4.0
 scapy>=2.4.4
 isc_dhcp_leases>=0.9.1
-dnspython==1.16.0
+dnspython==2.6.0rc1
 Flask>=2.0
-requests>=2.18.4
+requests>=2.31.0
 beautifulsoup4>=4.9.1
 PyJWT==2.1.0
 Flask-RESTful>=0.3.9
 aiofiles
 ping3
+setuptools>=78.1.1
+beautifulsoup4>=4.9.1
+asn1crypto>=1.0.0
+jwt>=1.0.0
+Flask-RESTful==0.3.10
+Werkzeug==3.1.0
+certifi>=2024.7.4 # not directly required, pinned by Snyk to avoid a vulnerability
+cryptography>=42.0.8 # not directly required, pinned by Snyk to avoid a vulnerability
+idna>=3.7 # not directly required, pinned by Snyk to avoid a vulnerability
+jinja2>=3.1.4 # not directly required, pinned by Snyk to avoid a vulnerability
+urllib3>=2.2.2 # not directly required, pinned by Snyk to avoid a vulnerabilityAdd commentMore actions
+zipp>=3.19.1 # not directly required, pinned by Snyk to avoid a vulnerability

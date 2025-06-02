@@ -5,6 +5,7 @@ import importlib
 import re
 from wifipumpkin3.core.utility.printer import display_messages
 
+
 # https://stackoverflow.com/questions/3365740/how-to-import-all-submodules
 def import_submodules(package, recursive=True):
     """Import all submodules of a module, recursively, including subpackages

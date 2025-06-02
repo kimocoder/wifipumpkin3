@@ -140,7 +140,7 @@ class DHCPProtocol(QObject):
                 pass
 
     def getHostnamePakcet(self, packet):
-        for (option_id, data) in sorted(packet._options.items()):
+        for option_id, data in sorted(packet._options.items()):
             result = None
             if option_id == 53:  # dhcp_message_type
                 pass

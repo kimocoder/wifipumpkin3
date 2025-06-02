@@ -63,19 +63,23 @@ class Proxies(ExtensionUI):
             output_table.append(
                 [
                     plugin_name,
-                    setcolor("True", color="green")
-                    if status_plugin
-                    else setcolor("False", color="red"),
+                    (
+                        setcolor("True", color="green")
+                        if status_plugin
+                        else setcolor("False", color="red")
+                    ),
                     plugin_info["Port"],
-                    plugin_info["Description"][:50] + "..."
-                    if len(plugin_info["Description"]) > 50
-                    else plugin_info["Description"],
+                    (
+                        plugin_info["Description"][:50] + "..."
+                        if len(plugin_info["Description"]) > 50
+                        else plugin_info["Description"]
+                    ),
                 ]
             )
 
         print(display_messages("Available proxies:", info=True, sublime=True))
         display_tabulate(headers_table, output_table)
-        
+
         # check plugin none
         if plugin_info_activated:
             # check if plugin selected is iquals the plugin config
@@ -86,13 +90,17 @@ class Proxies(ExtensionUI):
             all_plugins = plugin_info_activated["Config"].get_all_childname("plugins")
             if all_plugins:
                 for plugin_name in all_plugins:
-                    status_plugin = config_instance.get("plugins", plugin_name, format=bool)
+                    status_plugin = config_instance.get(
+                        "plugins", plugin_name, format=bool
+                    )
                     output_plugins.append(
                         [
                             plugin_name,
-                            setcolor("True", color="green")
-                            if status_plugin
-                            else setcolor("False", color="red"),
+                            (
+                                setcolor("True", color="green")
+                                if status_plugin
+                                else setcolor("False", color="red")
+                            ),
                         ]
                     )
                 print(
@@ -103,16 +111,17 @@ class Proxies(ExtensionUI):
                     )
                 )
                 display_tabulate(headers_plugins, output_plugins)
-            
+
             print(display_messages("Settings:", info=True, sublime=True))
-            plugin_settings = plugin_info_activated["Config"].get_all_childname("settings")
+            plugin_settings = plugin_info_activated["Config"].get_all_childname(
+                "settings"
+            )
             for config in plugin_settings:
                 print(
                     " {}={}".format(
-                        setcolor(config, color="purple"), 
-                        plugin_info_activated["Config"].get("settings", config)
+                        setcolor(config, color="purple"),
+                        plugin_info_activated["Config"].get("settings", config),
                     )
                 )
-            print('\n')
+            print("\n")
             self.show_help_command("help_proxy_plugin_command", True)
-            

@@ -75,7 +75,7 @@ class PumpKinProxy(ProxyMode):
         settings = self.config.get_all_childname("settings")
         for config in settings:
             list_commands.append("{}.{}".format(self.ID, config))
-            
+
         return list_commands
 
     def LogOutput(self, data):

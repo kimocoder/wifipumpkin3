@@ -25,12 +25,12 @@ class CaptiveTemplatePlugin(object):
     Version: str = "1.1"
     Description: str = "Example is a simple portal default page"
     Author: str = "Pumpkin-Dev"
-    TemplatePath: str  = None
+    TemplatePath: str = None
     StaticPath: str = None
     Preview: str = None
     Languages: Optional[list] = []
     config: SettingsINI = SettingsINI(C.CONFIG_CP_INI)
-    
+
     def __init__(self) -> None:
         if self.Languages:
             key = "set_{}".format(self.Name)
@@ -43,8 +43,8 @@ class CaptiveTemplatePlugin(object):
 
     def init_language(self, lang: Optional[str]):
         if lang:
-            self.TemplatePath = (
-                C.TEMPLATES_FLASK + "templates/{}/templates/{}".format(self.Name, lang)
+            self.TemplatePath = C.TEMPLATES_FLASK + "templates/{}/templates/{}".format(
+                self.Name, lang
             )
 
     def getActivatedLanguage(self) -> Optional[str]:
