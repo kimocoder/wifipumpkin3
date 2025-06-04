@@ -1,10 +1,10 @@
 netifaces>=0.10.9
 dhcplib==0.1.1
 tabulate>=0.8.5
-urwid==2.1.2
+urwid
 termcolor>=1.1.0
 twisted>=24.7.0rc1
-PyQt5>=5.14
+PyQt5
 PyQt5-sip
 pyOpenSSL>=22.1.0
 dnslib==0.9.17
@@ -15,16 +15,15 @@ dnspython==2.6.0rc1
 Flask>=2.0
 requests>=2.31.0
 beautifulsoup4>=4.9.1
-PyJWT==2.1.0
+PyJWT
 Flask-RESTful>=0.3.9
 aiofiles
 ping3
-setuptools>=78.1.1
 beautifulsoup4>=4.9.1
 asn1crypto>=1.0.0
 jwt>=1.0.0
 Flask-RESTful==0.3.10
-Werkzeug==3.1.0
+werkzeug
 certifi>=2024.7.4 # not directly required, pinned by Snyk to avoid a vulnerability
 cryptography>=42.0.8 # not directly required, pinned by Snyk to avoid a vulnerability
 idna>=3.7 # not directly required, pinned by Snyk to avoid a vulnerability
