@@ -42,10 +42,18 @@ if [ "$DEV" = true ] ; then
 fi
 apt -y remove python3-urwid python3-jwt python3-dnspython
 apt -y install python3 python3-all-dev python3-venv python3-minimal ${misc:Pre-Depends} ${python3:Depends} ${misc:Depends}
-
 python3 -m venv venv
-source venv/bin/activate
-pip install .
+pip install --upgrade pip setuptools wheel
+pip install build
+find . -name '*.pyc' -delete
+python3 -m build
+#apt -y install qt5-qmake qtbase5-dev
+#python3 -m venv venv
+#pip install build
+#python3 -m build
+# workaround if qt packages can't be installed by the use of 'apt':
+#pip install PyQt5==5.15.6 --only-binary=:all:
+#pip install .
 
 #DEBHELPER#
 RED='\033[0;31m'
@@ -57,8 +65,8 @@ if [ ! -d "$WIFIPUMPKIN3_DIR" ]; then
   mkdir $WIFIPUMPKIN3_DIR
 fi
 
-echo -e "${GREEN}install wifipumpkin3 dependencies ${NC}"
-python3 -m pip install 'netifaces>=0.10.9' 'aiofiles' 'dhcplib==0.1.1' 'tabulate>=0.8.5' 'urwid==2.1.2' 'termcolor>=1.1.0' 'twisted>=19.7.0' 'PyQt5>=5.14' 'PyQt5-sip' 'pyOpenSSL>=22.1.0' 'dnslib==0.9.17' 'loguru>=0.4.0' 'scapy>=2.4.4' 'isc_dhcp_leases>=0.9.1' 'dnspython==2.6.0rc1' 'Flask>=2.0' 'Flask-RESTful>=0.3.9' 'requests>=2.18.4' 'beautifulsoup4>=4.9.1' 'PyJWT==2.1.0' --break-system-packages
+#echo -e "${GREEN}install wifipumpkin3 dependencies ${NC}"
+#python3 -m pip install 'netifaces>=0.10.9' 'aiofiles' 'dhcplib==0.1.1' 'tabulate>=0.8.5' 'urwid==2.1.2' 'termcolor>=1.1.0' 'twisted>=19.7.0' 'PyQt5>=5.14' 'PyQt5-sip' 'pyOpenSSL>=22.1.0' 'dnslib==0.9.17' 'loguru>=0.4.0' 'scapy>=2.4.4' 'isc_dhcp_leases>=0.9.1' 'dnspython==2.6.0rc1' 'Flask>=2.0' 'Flask-RESTful>=0.3.9' 'requests>=2.18.4' 'beautifulsoup4>=4.9.1' 'PyJWT==2.1.0' --break-system-packages
 
 
 echo -e "${GREEN}wifipumpkin3 is successfully installed.${NC}\n"
