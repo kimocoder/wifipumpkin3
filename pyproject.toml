@@ -1,0 +1,68 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wifipumpkin3"
+version = "1.1.8"
+description = "Powerful framework for rogue access point attack."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "Apache-2.0" }
+
+authors = [
+  { name = "Marcos Bomfim (mh4x0f) - P0cL4bs Team", email = "mh4root@gmail.com" }
+]
+
+dependencies = [
+  "netifaces>=0.10.9",
+  "dhcplib==0.1.1",
+  "tabulate>=0.8.5",
+  "urwid",
+  "termcolor>=1.1.0",
+  "twisted>=24.7.0rc1",
+  "PyQt5",
+  "PyQt5-sip",
+  "pyOpenSSL>=22.1.0",
+  "dnslib==0.9.17",
+  "loguru>=0.4.0",
+  "scapy>=2.4.3",
+  "isc_dhcp_leases>=0.9.1",
+  "dnspython",
+  "Flask>=1.1.1",
+  "requests>=2.31.0",
+  "beautifulsoup4>=4.9.1",
+  "PyJWT",
+  "Flask-RESTful==0.3.10",
+  "aiofiles",
+  "ping3",
+  "asn1crypto>=1.0.0",
+  "jwt>=1.0.0",
+  "werkzeug",
+  "certifi>=2024.7.4",
+  "cryptography>=42.0.8",
+  "idna>=3.7",
+  "jinja2>=3.1.4",
+  "urllib3>=2.2.2",
+  "zipp>=3.19.1"
+]
+
+[project.urls]
+Homepage = "https://github.com/P0cL4bs/wifipumpkin3"
+
+[project.scripts]
+wifipumpkin3 = "wifipumpkin3.__main__:main"
+wp3 = "wifipumpkin3.__main__:main"
+captiveflask = "wifipumpkin3.plugins.bin.captiveflask:main"
+phishkin3 = "wifipumpkin3.plugins.bin.phishkin3:main"
+evilqr3 = "wifipumpkin3.plugins.bin.evilqr3:main"
+sslstrip3 = "wifipumpkin3.plugins.bin.sslstrip3:main"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+exclude = ["tests", "*.tests", "*.tests.*", "tests.*"]
+
+[tool.setuptools.package-data]
+"*" = ["*.json", "*.md", "*.txt", "*.conf", "*.html", "*.js", "*.css"]

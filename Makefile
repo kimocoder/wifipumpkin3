@@ -11,7 +11,7 @@ test_coverage:
 
 install:
 	find . -name '*.pyc' -delete
-	python3 -m pip install . --break-system-packages
+	@python3 -m build
 
 install_env:
 	python3 -m pip install PyQt5==5.14
@@ -22,11 +22,12 @@ install_env:
 install_dev:
 	pip3 uninstall wifipumpkin3
 	find . -name '*.pyc' -delete
-	python3 -m pip install . --break-system-packages
+	@python3 -m build
 
 clean:
-	rm -rf build dist README MANIFEST *.egg-info
-	python3 setup.py clean --all
+	@rm -rf build dist README MANIFEST *.egg-info
+	@rm -rf *.egg-info build/ dist/ venv/
+	@python3 setup.py clean --all
 
 distclean: clean
 	rm -rf .venv

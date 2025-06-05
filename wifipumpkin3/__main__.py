@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 from logging import getLogger, ERROR
-
 from wifipumpkin3.core.config.setup import create_user_dir_config
+
+if __name__ == "__main__":
+    create_user_dir_config()
+    main()
 
 getLogger("scapy.runtime").setLevel(ERROR)
 import argparse

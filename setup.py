@@ -30,10 +30,6 @@ def version(version_file):
     return None
 
 
-with open("requirements.txt") as fp:
-    required = [line.strip() for line in fp if line.strip() != ""]
-
-
 folders = ["config"]
 
 
@@ -77,7 +73,6 @@ setup(
     url="https://github.com/P0cL4bs/wifipumpkin3",
     license="apache 2.0",
     long_description=open("README.md").read(),
-    install_requires=required,
     data_files=generate_data_files(),
     include_package_data=True,
     packages=find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
