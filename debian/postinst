@@ -40,9 +40,8 @@ apt update
 if [ "$DEV" = true ] ; then
   apt -y install debhelper dpkg
 fi
-apt -y install python3 python3-all-dev
-apt -y install python3-minimal ${misc:Pre-Depends}
-apt -y install ${python3:Depends} ${misc:Depends}
+apt -y remove python3-urwid python3-jwt python3-dnspython
+apt -y install python3 python3-all-dev python3-minimal ${misc:Pre-Depends} ${python3:Depends} ${misc:Depends}
 
 python3 -m pip install --upgrade pip --break-system-packages
 
