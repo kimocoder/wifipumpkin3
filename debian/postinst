@@ -43,8 +43,8 @@ fi
 apt -y remove python3-urwid python3-jwt python3-dnspython
 apt -y install python3 python3-all-dev python3-venv python3-minimal ${misc:Pre-Depends} ${python3:Depends} ${misc:Depends}
 python3 -m venv venv
-pip install --upgrade pip setuptools wheel
-pip install build
+pip install --upgrade pip setuptools wheel black --break-system-packages
+pip install build --break-system-packages
 find . -name '*.pyc' -delete
 python3 -m build
 #apt -y install qt5-qmake qtbase5-dev

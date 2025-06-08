@@ -15,6 +15,7 @@ authors = [
 ]
 
 dependencies = [
+  "black",
   "netifaces>=0.10.9",
   "dhcplib==0.1.1",
   "tabulate>=0.8.5",
