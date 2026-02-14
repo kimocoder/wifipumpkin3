@@ -4,3 +4,4 @@ jwt
 Flask-RESTful==0.3.10
 werkzeug
 setuptools
+cryptography>=46.0.5 # not directly required, pinned by Snyk to avoid a vulnerability
